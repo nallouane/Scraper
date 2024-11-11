@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrape URL</title>
+</head>
+<body>
+    <h1>Enter a URL to Scrape</h1>
+
+    <!-- Form for URL input -->
+    <form method="POST">
+        {% csrf_token %}
+        <label for="url">Enter URL:</label>
+        <input type="url" id="url" name="url" required>
+        <button type="submit">Scrape</button>
+    </form>
+
+    <h2>Scraped URLs and Content</h2>
+
+    {% if all_data %}
+        <ul>
+            {% for entry in all_data %}
+                <li>
+                    <strong>URL:</strong> {{ entry.url }}<br>
+                    <strong>Scraped Content:</strong> {{ entry.scraped_content }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No data available.</p>
+    {% endif %}
+</body>
+</html>
